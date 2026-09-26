@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pincode Finder</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">P</div>
+      <div>
+        <h1>Pincode Finder</h1>
+        <span>FastAPI-powered location lookup</span>
+      </div>
+    </div>
+    <a class="api-link" href="/docs" target="_blank">API Docs ↗</a>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">INDIA PINCODE LOOKUP</span>
+        <h2>Find a location<br><span>from a pincode.</span></h2>
+        <p>Enter one pincode for a quick lookup, or check several pincodes together with the bulk search. Every result is dropped on a map.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="pin">⌖</div>
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+      </div>
+    </section>
+
+    <section class="search-grid">
+      <div class="card single-card">
+        <div class="card-head">
+          <div>
+            <span class="card-label">SINGLE LOOKUP</span>
+            <h3>Search one pincode</h3>
+          </div>
+          <span class="endpoint">GET /pincode/{code}</span>
+        </div>
+        <form id="singleForm">
+          <label for="singlePincode">Indian pincode</label>
+          <div class="input-row">
+            <input id="singlePincode" maxlength="6" inputmode="numeric" placeholder="e.g. 110001" autocomplete="off">
+            <button type="submit">Find location</button>
+          </div>
+          <p class="hint">Exactly 6 digits</p>
+        </form>
+        <div id="singleResult" class="result-area hidden"></div>
+      </div>
+
+      <div class="card bulk-card">
+        <div class="card-head">
+          <div>
+            <span class="card-label">BULK LOOKUP</span>
+            <h3>Search multiple pincodes</h3>
+          </div>
+          <span class="endpoint">POST /pincode/bulk</span>
+        </div>
+        <form id="bulkForm">
+          <label for="bulkPincodes">Pincodes</label>
+          <textarea id="bulkPincodes" rows="5" placeholder="110001, 400001, 560001"></textarea>
+          <div class="bulk-actions">
+            <span class="hint">Up to 20 pincodes</span>
+            <button type="submit">Search all</button>
+          </div>
+        </form>
+        <div id="bulkResult" class="result-area hidden"></div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <div class="card map-card">
+        <div class="card-head">
+          <div>
+            <span class="card-label">ON THE MAP</span>
+            <h3 id="mapCaption">India</h3>
+          </div>
+          <span class="endpoint" id="mapMeta">Search above to zoom in</span>
+        </div>
+        <div id="mainMap" class="main-map"></div>
+      </div>
+    </section>
+
+    <section class="quick-section">
+      <div class="section-title">
+        <div>
+          <span class="card-label">QUICK SEARCH</span>
+          <h3>Try a popular pincode</h3>
+        </div>
+        <span id="dbCount" class="count-badge">300 locations</span>
+      </div>
+      <div id="quickGrid" class="quick-grid"></div>
+    </section>
+
+    <footer>
+      <span>Built with FastAPI + Pydantic</span>
+      <span>•</span>
+      <span>Pincode Finder</span>
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
